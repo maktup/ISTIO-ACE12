@@ -1,0 +1,107 @@
+
+"DEMO#4: (UNIFICANDO TODO)": 
+--------------------------- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-istio-service-demo4
+  namespace: ace-istio 
+  labels:
+    app: my-istio-service-demo4
+spec:
+  selector:
+    app: my-istio-service-demo4
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7800
+      targetPort: 7800
+    - name: https
+      protocol: TCP
+      port: 7843
+      targetPort: 7843
+      
+---
+
+kind: Gateway
+apiVersion: networking.istio.io/v1beta1
+metadata:
+  name: my-istio-gateway-demo4
+  namespace: ace-istio
+spec:
+  servers:
+    - port:
+        number: 80
+        protocol: HTTP
+        name: http
+      hosts:
+        - '*'
+  selector:
+    istio: ingressgateway
+
+--- 
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-istio-service-demo4
+  namespace: ace-istio 
+spec:
+  hosts:
+    - '*'
+  gateways:
+    - my-istio-gateway-demo4
+  http:
+    - match:
+        - uri:
+            prefix: /employeeservice
+      route:
+        - destination:
+            host: my-istio-service-demo4
+            subset: v1
+            port:
+              number: 7800
+          weight: 90
+        - destination:
+            host: my-istio-service-demo4
+            subset: v2
+            port:
+              number: 7800
+          weight: 10
+             
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: my-istio-service-demo4
+  namespace: ace-istio 
+spec:
+  host: my-istio-service-demo4.ace-istio.svc.cluster.local
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+        version: v2
+
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: my-istio-service-demo4
+  namespace: ace-istio
+  labels:
+    app: my-istio-service-demo4
+spec:
+  host: my-istio-service-demo4-ace-istio.apps.tarkin.coc-ibm.com
+  to:
+    kind: Service
+    name: my-istio-service-demo4
+  port:
+    targetPort: http
+    
