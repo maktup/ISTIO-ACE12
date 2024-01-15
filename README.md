@@ -19,10 +19,12 @@ The entire procedure in the PDF.
 ---------------
 
 I. DEFINITIONS:
+
 WHAT IS SERVICE MESH?:
 It is a dedicated INFRASTRUCTURE layer which can be added to our APPLICATIONS, with the objective of achieving: OBSERVABILITY, MANAGEMENT TRAFFIC, SECURITY.
 
 WHAT IS ISTIO?:
+
 Currently, there are several IMPLEMENTATIONS of SERVICE MESH, of which the most important currently is: ISTIO. It is an OpenSource MESH SERVICE that is transparently overlaid on DISTRIBUTED APPLICATIONS. Likewise, ISTIO provides:
 ▪ TRACEABILITY of MICROSERVICES & possible DEPENDENCIES between them.
 ▪ Secure communication between MICROSERVICES in a cluster with TLS encryption, authenticating & authorizing.
@@ -33,6 +35,7 @@ Currently, there are several IMPLEMENTATIONS of SERVICE MESH, of which the most 
 IMPORTANT: “Know that the idea is that the MICROSERVICES manage only BUSINESS LOGIC & that everything ADDITIONAL such as: treatment of security protocols, etc., is managed by the same: SERVICE MESH.”
 
 WHAT IS THE ISTIO ARCHITECTURE LIKE:
+
 The COMPONENTS that ISTIO manages are:
 ✓ CONTROL PLANE: This is responsible for managing & configuring the PROXYS for TRAFFIC ROUTING based on the defined RULES.
 ✓ DATA PLANE: Composed of a set of intelligent PROXYS (ENVOY) created in CONTAINERs & deployed as SIDECARs in the PODs, these control all COMMUNICATION between the MICROSERVICES & collect TELEMETRY of all the TRAFFIC of the SERVICE MESH.
@@ -41,7 +44,9 @@ Said TELEMETRY is an OBSERVABILITY feature provided by ISTIO, to OBSERVE the beh
 ✓ Metrics (LATENCY, ERRORS, SATURATION).
 ✓ Distributed Traces (MICROSERVICES TRAFFIC FLOW).
 
+
 II. INSTALLATION & SETUP:
+
 Initially you want to VALIDATE the version of OPENSHIFT that you have installed.
 
 In this case, it is DISPLAYED:
@@ -60,8 +65,11 @@ to the NAMESPACE: istio-system.
 
 First the OPERATOR called:
 ✓ NAME: OpenShift Service Mesh
+
 ✓ VERSION: 2.4.5- 0
+
 ✓ INSTALLATION MODE: All Namespaces on the cluster.
+
 
 IMPORTANT: “The INSTALLATION can be accessed from all the NAMESPACES, but where it will mainly be installed will be in the NAMESPACE: openshift-operators”.
 
@@ -74,8 +82,11 @@ IMPORTANT: “The INSTALLATION can be accessed from all
 the NAMESPACES, but where it will mainly be installed will be in the NAMESPACE: openshift-operators”. Then, within the NAMESPACE: istio-system, we proceed to install the OPERATOR called:
 
 ✓ NAME: Red Hat Openshift distributed tracing platform
+
 ✓ VERSION: 1.47.1- 5
+
 ✓ INSTALLATION MODE: All Namespaces on the cluster.
+
 
 IMPORTANT: “The INSTALLATION can be accessed from all the NAMESPACES, but where it will mainly be installed will be in the NAMESPACE: openshift-distributed-tracing”. Then, we proceed to validate the OPERATORs installed within the NAMESPACE: istio-system:
 
