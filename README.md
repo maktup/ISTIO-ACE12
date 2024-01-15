@@ -3,6 +3,7 @@ IMPLEMENTATION OF: “ISTIO” (MESH SERVICES) & “IBM APP CONNECT12” CONTAIN
 This document focuses on the PROCEDURE for the implementation of SERVICE MESH with ISTIO, applied to IBM APP CONNECT v12. 
 The proposed INDEX will be the following:
 
+
 I. DEFINITIONS.
 
 II. INSTALLATION & CONFIGURATION.
